@@ -1,39 +1,35 @@
-# XGWebSite-Awesome
-🌍 网站推荐
+# 🌍 XGWebSite-Awesome 网站推荐
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![Project Status](https://img.shields.io/badge/Status-Development-black) ![License](https://img.shields.io/badge/License-MIT-black)
 
-## Getting Started
+一个极简风格(性冷淡风)的精选网站收藏集。
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+本项目是个人学习项目（干中学）
+主要用于给我练习 React 和 Next 的使用。 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ps: 其实我是Vue入门的。但是！React也是想要了解的嘛~ 工具没有好坏，都要学！
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+灵感来源： [LKs 网站推荐合集 - https://lkssite.vip/](https://lkssite.vip/)
 
-## Learn More
+## ✨ 特性
 
-To learn more about Next.js, take a look at the following resources:
+- **极简设计**: 遵循 Vercel 设计美学，黑白灰冷淡风。
+- **极致性能**: 基于 Next.js 16 (Turbopack) 构建。
+- **流畅交互**: 使用 Framer Motion 实现丝滑的微交互。
+- **类型安全**: 全面拥抱 TypeScript。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ 技术栈
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: [Next.js 16](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Animation**: [Framer Motion](https://www.framer.com/motion/)
+- **Database**: [Supabase](https://supabase.com/)
+- **Deployment**: [Vercel](https://vercel.com/)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
