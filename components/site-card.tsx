@@ -28,10 +28,10 @@ interface SiteCardProps {
 export function SiteCard({ site }: SiteCardProps) {
     return (
         <Link href={site.url} target="_blank" rel="noreferrer">
-            <Card  className="flex flex-col overflow-hidden border-border/40 bg-background/50 backdrop-blur-sm transition-all hover:shadow-2xl">
+            <Card  className="flex flex-col overflow-hidden border-border/40 bg-background/50 backdrop-blur-sm transition-all hover:shadow-2xl dark:hover:shadow-amber-50/5 dark:border-border/50 dark:shadow-border/50">
                 <CardHeader className="p-5 pb-0 min-h-32"> 
                     <div className="flex items-center gap-3 mb-2"> 
-                        <div className="relative shrink-0 ring-1 ring-border rounded-full overflow-hidden bg-muted">
+                        <div className="relative shrink-0">
                             {site.image ? (
                                 <Image
                                     src={site.image}
