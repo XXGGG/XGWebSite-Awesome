@@ -1,0 +1,7 @@
+# 使用最新的 supabase 客户端，通常兼容性更好
+supabase>=2.13.0
+pandas>=2.2.0
+python-dotenv>=1.0.0
+openpyxl>=3.1.2
+websockets>=13.0
+# 移除显式的 httpcore 版本限制，让 pip 自动解决

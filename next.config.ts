@@ -5,9 +5,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'assets.vercel.com',
+        hostname: 'rzbaojeyldwgqolgxcjy.supabase.co', // 你的 Supabase 项目域名
         port: '',
-        pathname: '/**', // 允许该域名下的所有路径
+        pathname: '/**',
       },
     ],
   },

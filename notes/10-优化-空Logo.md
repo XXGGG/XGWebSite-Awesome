@@ -1,3 +1,53 @@
+# 🎨 Vercel 风格网站构建教程：优化篇 (Logo 自动获取)
+
+在展示网站列表时，如果每个网站都需要手动上传 Logo 图片，那工作量太大了。
+我们希望实现一个智能的 Logo 加载策略：
+
+1.  **优先显示**：你自己上传的精美 Logo (存在 Supabase)。
+2.  **自动降级**：如果没有上传，尝试自动获取该网站的 `favicon.ico`。
+3.  **最终兜底**：如果连 Favicon 都找不到（图片裂开），显示一个默认的图标（比如地球或文字首字母）。
+
+---
+
+## 🛠️ 实现思路
+
+为了实现这个功能，我们需要把 `SiteCard` 变成一个 **Client Component** (客户端组件)，因为我们需要监听图片的 `onError` 事件来判断图片是否加载失败。
+
+### 核心逻辑
+
+```mermaid
+graph TD
+A[开始加载] --> B{有 site.image?}
+B -- Yes --> C[加载 Supabase 图片]
+B -- No --> D[尝试加载 /favicon.ico]
+C -- 失败 (onError) --> D
+D -- 失败 (onError) --> E[显示默认图标]
+```
+
+---
+
+## 🚀 代码实现
+
+修改 `components/site-card.tsx`。
+
+### 1. 引入必要的 Hook 和图标
+我们需要 `useState` 来记录图片是否出错，以及 `lucide-react` 里的 `Globe` 图标作为兜底。
+
+### 2. 获取 Favicon 的技巧
+直接请求 `https://domain.com/favicon.ico` 有时候会遇到 404 或者跨域问题。
+更稳妥的方式是使用 Google 的 Favicon 服务（或者 DuckDuckGo），它们提供了统一的 API：
+`https://www.google.com/s2/favicons?domain={域名}&sz=128`
+
+但既然你要求 "用 img 去获取源网站的 favicon.ico"，我们可以先尝试直接构造 URL，或者为了稳定性，我们结合两者。
+*(采用 Google 服务方案，因为它是最稳定且不需要配置 Next.js 域名的)*
+
+**注意**：如果我们直接用 `<img />` 标签（小写的 HTML 标签）而不是 Next.js 的 `<Image />`，就不需要在 `next.config.ts` 里配置域名白名单了！这对展示外部不可控的 Favicon 非常有用。
+
+---
+
+## 📝 修改后的代码
+
+```tsx
 "use client"
 
 import Image from "next/image"
@@ -104,3 +154,4 @@ export function SiteCard({ site }: SiteCardProps) {
         </Link >
     )
 }
+```

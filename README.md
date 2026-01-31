@@ -150,6 +150,23 @@
 这个以后测试.......
 
 
+
+## 数据上传
+
+scripts 目录下有个 sync.py 文件，用来上传数据到 Supabase。
+设置好data.xlsx 文件，然后运行 sync.py 即可。
+
+> 注意：
+> 1. 运行前需要先安装 requirements.txt 里的依赖。
+> 2. 运行前需要先设置好 .env.local 文件里的环境变量。
+> 3. 运行前需要先设置好 data.xlsx 文件里的网站数据。
+
+### 图片上传
+
+script 目录下有个 upload_images.py 文件，用来上传图片到 Supabase。
+要上传的图片放在 `images_upload` 目录下。上传完会自动归类到 `images_done` 目录下。
+
+
 ## 开发记录：
 1. [x] [01-项目规划.md](notes/01-项目规划.md)
 2. [x] [02-字体.md](notes/02-字体.md)
@@ -159,6 +176,8 @@
 6. [x] [06-分类栏.md](notes/06-分类栏.md)
 7. [x] [07-Supabse.md](notes/07-Supabse.md) 
 8. [x] [08-Vercel.md](notes/08-Vercel.md) 
+9. [x] [09-数据上传.md](notes/09-数据上传.md)
+10. [x] [10-优化-空Logo.md](notes/10-优化-空Logo.md) 
 
 
 ## 参考：

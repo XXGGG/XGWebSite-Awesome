@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 dev
+
+# scripts data (keep scripts code but ignore data)
+scripts/data.xlsx
+scripts/images_upload/
+scripts/images_done/
