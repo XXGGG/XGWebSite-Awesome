@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Star, Globe } from "lucide-react"
 import { useState } from "react"
+import { useLocalStorage } from "@/hooks/use-local-storage"
 
 import { Badge } from "@/components/ui/badge"
 import {
@@ -39,6 +40,27 @@ export function SiteCard({ site }: SiteCardProps) {
             return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
         } catch {
             return ""
+        }
+    }
+
+    // 1. 读取本地存储中的 'favorite-sites'，默认值是个空数组 []
+    const [favorites, setFavorites] = useLocalStorage<string[]>("favorite-sites", [])
+
+    // 2. 判断当前网站 ID 是否在列表里
+    // 注意：这里我们用 site.id 来作为唯一标识
+    const isFavorite = favorites.includes(site.id)
+
+    // 3. 处理点击事件
+    const toggleFavorite = (e: React.MouseEvent) => {
+        e.preventDefault() // 阻止跳转（因为卡片本身是个 Link）
+        e.stopPropagation() // 阻止冒泡
+
+        if (isFavorite) {
+            // 如果已收藏，就移除
+            setFavorites(favorites.filter(id => id !== site.id))
+        } else {
+            // 如果没收藏，就添加
+            setFavorites([...favorites, site.id])
         }
     }
 
@@ -83,7 +105,17 @@ export function SiteCard({ site }: SiteCardProps) {
                         </CardTitle>
 
                         {/* 收藏按钮 */}
-                        <Star className={site.isFavorite ? "fill-yellow-400 stroke-yellow-400" : "stroke-muted-foreground/50"} />
+                        <button
+                            onClick={toggleFavorite}
+                            className="p-1 hover:bg-accent rounded-full transition-colors"
+                        >
+                            <Star
+                                className={`w-6 h-6 transition-all ${isFavorite
+                                        ? "fill-yellow-400 stroke-yellow-400"
+                                        : "stroke-muted-foreground/50 hover:stroke-yellow-400"
+                                    }`}
+                            />
+                        </button>
                     </div>
 
                     <CardDescription className="line-clamp-2 text-sm leading-relaxed text-muted-foreground/80" title={site.description}>

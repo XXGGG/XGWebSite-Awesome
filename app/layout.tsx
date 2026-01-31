@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "XGWebSite-Awesome",
   description: "一个基于 Vercel Aesthetic (极简工业风) 的网站推荐平台",
   icons: {
-    icon: "/favicon.svg",
+    icon: "favicon.ico",
   },
 };
 

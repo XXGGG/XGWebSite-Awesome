@@ -119,6 +119,7 @@
 9. [x] [09-数据上传.md](notes/09-数据上传.md)
 10. [x] [10-优化-空Logo.md](notes/10-优化-空Logo.md) 
 11. [x] [11-Github与投稿.md](notes/11-Github与投稿.md) (投稿先暂停吧.... haha)
+12. [x] [12-轻量收藏Star.md](notes/12-轻量收藏Star.md)
 
 ## 参考：
 - [LKs 网站推荐合集 - lkssite.vip](https://lkssite.vip/)
