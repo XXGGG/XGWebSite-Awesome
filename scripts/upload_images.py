@@ -1,5 +1,7 @@
 import os
 import shutil
+import hashlib
+import tldextract
 from supabase import create_client, Client
 from dotenv import load_dotenv
 import mimetypes
@@ -52,16 +54,41 @@ def upload_image():
             
             # 2. 检查数据库是否存在该 Title
             # 注意：这里我们只更新已存在的网站。如果网站还没创建，图片就先不传。
-            res = supabase.table('sites').select('id').eq('title', title_name).execute()
+            res = supabase.table('sites').select('id, url').eq('title', title_name).execute()
             
             if not res.data:
                 print(f"   ⚠️ 跳过：数据库里没找到标题为 '{title_name}' 的网站。请先运行 sync.py 创建网站。")
                 continue
 
-            # 3. 上传到 Storage (覆盖模式)
-            # 使用 timestamp 防止浏览器缓存，或者直接覆盖
-            # 这里我们选择直接用文件名作为存储路径，方便管理
-            storage_path = filename
+            site_info = res.data[0]
+            site_url = site_info.get('url', '')
+
+            # 3. 生成云端文件名 (使用域名主体)
+            # 策略：尝试从网站 URL 中提取域名主体（domain），如果提取失败或 URL 为空，则回退到 MD5 哈希。
+            # 例如：https://www.google.com -> google.png
+            #       https://github.com -> github.png
+            file_ext = os.path.splitext(filename)[1]
+            
+            domain_name = ""
+            if site_url:
+                try:
+                    # 使用 tldextract 智能提取域名主体 (自动处理 .com.cn, .co.uk 等复杂后缀)
+                    extracted = tldextract.extract(site_url)
+                    if extracted.domain:
+                        domain_name = extracted.domain
+                except Exception:
+                    pass
+            
+            if domain_name:
+                # 成功提取到域名主体，使用它作为文件名
+                # 为了防止同一个域名有多个不同图片（虽然理论上不太可能），可以加个 hash 后缀或者直接用
+                # 这里我们直接用域名，简洁为主
+                storage_path = f"{domain_name}{file_ext}"
+            else:
+                # 提取失败（可能是 URL 为空或非法），回退到 MD5 方案
+                print(f"   ⚠️ 警告：无法从 URL '{site_url}' 提取域名，将使用哈希文件名。")
+                filename_hash = hashlib.md5(filename.encode('utf-8')).hexdigest()
+                storage_path = f"{filename_hash}{file_ext}"
             
             with open(file_path, 'rb') as f:
                 file_content = f.read()

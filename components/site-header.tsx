@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
-import { SquircleDashed } from 'lucide-react';
+import { SquircleDashed, Github, ArrowUpFromLine } from 'lucide-react'; // 👈 新增 Github
+import { Button } from "@/components/ui/button"; // 👈 新增 Button 组件
 
 export function SiteHeader() {
     return (
@@ -16,7 +17,30 @@ export function SiteHeader() {
 
 
                 {/* 右侧 */}
-                <nav className="flex items-center">
+                <nav className="flex items-center gap-2">
+                    {/* 1. 提交网站按钮 (只在电脑端显示文字，移动端可能需要隐藏或简化，这里先做简单版) */}
+                    {/* <Button variant="ghost" asChild className="text-sm font-medium" title="提交网站" >
+                        <Link
+                            href="https://your-feishu-form-url" // 👈 替换成你的飞书表单链接
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <ArrowUpFromLine className="w-5 h-5" />
+                        </Link>
+                    </Button> */}
+
+                    {/* 2. GitHub 图标按钮 */}
+                    <Button variant="ghost" size="icon" asChild>
+                        <Link
+                            href="https://github.com/XXGGG/XGWebSite-Awesome" // 👈 替换成你的 GitHub 地址
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label="GitHub"
+                        >
+                            <Github className="w-5 h-5" />
+                        </Link>
+                    </Button>
+
                     <ModeToggle />
                 </nav>
             </div>

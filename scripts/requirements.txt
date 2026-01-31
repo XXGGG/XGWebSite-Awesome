@@ -4,4 +4,5 @@ pandas>=2.2.0
 python-dotenv>=1.0.0
 openpyxl>=3.1.2
 websockets>=13.0
+tldextract>=5.1.0
 # 移除显式的 httpcore 版本限制，让 pip 自动解决
